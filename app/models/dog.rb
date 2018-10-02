@@ -17,37 +17,63 @@ class Dog < ActiveRecord::Base
   def self.get_user_answer
     puts "What's your dog's name?"
     self.all_name
-    user_input = gets.chomp
+    user_input
+  end
+
+  def self.user_input
+    gets.chomp
   end
 
   def menu
     case user_input
      when "1"
-     toby
+       toby
 
      when "2"
-     menu_two
+       bailey
 
      when "3"
-     menu_three
+       diesel
 
      when "4"
-     menu_four
+       chanel
 
      when "5"
-     menu_five
+       louie
 
      when "6"
-     menu_six
+       henry
 
      when "7"
-     menu_seven
+       jenn
 
      when "8"
-     menu_eight
+       max
+
+     when "9"
+      brownie
+
+     when "10"
+      mandy
    end
   end
 
+  def toby
+    puts "Hello Toby. You are a beautiful Goldendoodle and 1 year old"
+    puts "Is this correct? Press y/n"
+    case toby_input = gets.chomp
+      when "y"
+        Groomer.ask_groomer
+      when "n"
+        get_user_answer
+    end
+  end
+
+  def self.runner
+    welcome
+    get_user_answer
+
+  end
 
 
 
