@@ -1,6 +1,7 @@
 class Appointment < ActiveRecord::Base
   belongs_to :dog
   belongs_to :groomer
+  @@appointment = nil
 
   def self.all_appointments
     Appointment.all.each do |appt|
@@ -10,17 +11,9 @@ class Appointment < ActiveRecord::Base
 
   def self.pics
     puts "
-    _     /)---(\          /~~~\
-    \\   (/ . . \)        /  .. \
-     \\__)-\(*)/         (_,\  |_)
-      \_       (_         /   \@/    /^^^\
-      (___/-(____) _     /      \   / . . \
-                   \\   /  `    |   V\ Y /V
-                    \\/  \   | _\    / - \
-                     \   /__'|| \\_  |    \
-                      \_____)|_).\_).||(__V
-
-        "
+            >(.)__ <(.)__ =(.)__
+              (___/  (___/  (___/
+                                       "
   end
 
   def self.get_appointments
@@ -39,12 +32,18 @@ class Appointment < ActiveRecord::Base
   end
 
   def self.appointment_answer(arg)
-    appt = Appointment.find(arg)
-    puts "Sure, I'll make an appointment for #{appt.day}"
+    @@appointment = Appointment.find(arg)
+    puts "I'll make an appointment for #{appointment.day}"
     Service.run
   end
 
+  def self.appointment
+    @@appointment
+  end
 
+  def self.appointment=(appointment)
+    @@appointment = appointment
+  end
 
   def self.runner
     pics

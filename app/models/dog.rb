@@ -1,6 +1,7 @@
 class Dog < ActiveRecord::Base
   has_many :appointments
   has_many :groomers, through: :appointments
+  @@all = nil
 
   def self.welcome
     puts "
@@ -17,7 +18,8 @@ class Dog < ActiveRecord::Base
   end
 
   def self.get_user_answer
-    puts "What's your dog's name?"
+    puts "What's your dog's name? Please enter between 1-10."
+    puts "***************************************************"
     self.all_name
   end
 
@@ -26,7 +28,8 @@ class Dog < ActiveRecord::Base
   end
 
   def self.dogs(arg)
-    dog = Dog.find(arg)
+    if arg.to_i >= 1 && arg.to_i <= 10
+    @@dog = Dog.find(arg)
     puts "Hello #{dog.name}. You are a beautiful #{dog.age} year old #{dog.breed}"
     puts "Is this correct? Press y/n"
     case toby_input = gets.chomp
@@ -34,7 +37,20 @@ class Dog < ActiveRecord::Base
       Appointment.runner
       when "n"
         runner
+      end
+    else
+      puts "Let's try that again"
+      puts "I said enter between 1-10"
+      runner
     end
+  end
+
+  def self.dog
+    @@dog
+  end
+
+  def self.dog=(dog)
+    @@dog = dog
   end
 
   def self.runner

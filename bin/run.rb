@@ -1,5 +1,7 @@
 require_relative '../config/environment'
 
+old_logger = ActiveRecord::Base.logger
+ActiveRecord::Base.logger = nil
 
 # do I save all the data with .save or somewhere else? like in the run file..?
 

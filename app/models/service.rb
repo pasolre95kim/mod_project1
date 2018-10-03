@@ -1,3 +1,5 @@
+require 'pry'
+require 'launchy'
 class Service < ActiveRecord::Base
   has_many :appointments
 
@@ -19,12 +21,14 @@ class Service < ActiveRecord::Base
 
   def self.users_answer(arg)
     service = Service.find(arg)
-    puts "You have booked for #{service.service} on!"
+    puts "You have booked for #{service.service} on #{Appointment.appointment.day}!"
   end
 
     def self.run
       ask_service
       users_answer(user_input)
+      Launchy.open(Dog.dog.picture)
+      Dog.runner
     end
 
 
