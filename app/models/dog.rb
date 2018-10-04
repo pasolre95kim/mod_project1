@@ -1,56 +1,90 @@
+require 'colorize'
 class Dog < ActiveRecord::Base
   has_many :appointments
   has_many :groomers, through: :appointments
+  @@all = nil
 
   def self.welcome
-    puts "Hello & Welcome!"
+    puts "
+.-.-. .-.-. .-.-. .-.-. .-.-. .-.-. .-.-.
+'. w )'. e )'. l )'. c )'. o )'. m )'. e )
+  ).'   ).'   ).'   ).'   ).'   ).'   ).'
+                                                ".red.blink
   end
 
   def self.all_name
-    count = 0
     Dog.all.each do |dog|
-      count+= 1
-      puts "#{count}. #{dog.name} "
+      puts "#{dog.id}. #{dog.name} "
     end
   end
 
   def self.get_user_answer
-    puts "What's your dog's name?"
+    puts "What's your dog's name? Please enter between 1-10."
+    puts "***************************************************"
     self.all_name
-    user_input = gets.chomp
   end
 
-  def menu
-    case user_input
-     when "1"
-     toby
+  def self.user_input
+    gets.chomp
+  end
 
-     when "2"
-     menu_two
+  def self.dogs(arg)
+    if arg.to_i >= 1 && arg.to_i <= 10
+    @@dog = Dog.find(arg)
+    puts " "
+    puts "Hello #{dog.name}. You are a beautiful #{dog.age} year old #{dog.breed}"
+    puts "Is this correct? Press y/n"
+    case toby_input = gets.chomp
+      when "y"
+      Groomer.runner
+      when "n"
+        runner
+      end
+    else
+      runner_two
+    end
+  end
 
-     when "3"
-     menu_three
+  def self.dog
+    @@dog
+  end
 
-     when "4"
-     menu_four
-
-     when "5"
-     menu_five
-
-     when "6"
-     menu_six
-
-     when "7"
-     menu_seven
-
-     when "8"
-     menu_eight
-   end
+  def self.dog=(dog)
+    @@dog = dog
   end
 
 
+  def self.emoji
+    puts "
+           _ _                NO NO
+       _(,/ \\ \\____________
+       |`. \\_@_@   `.     ,'
+       |\ \ .          `-,-'
+       || |  `-.____,-'
+       || /  /
+       |/ |  |
+ `..      /   \\
+   \\\     /    |
+   ||   |      \\
+    \\   /-.    |
+    || /  /_   |
+    \\(______)-'_)
+    ".light_blue
+  end
 
 
-#list of dogs(interpolate) in numbers
+  def self.runner_two
+    puts " "
+    emoji
+    puts "Let's try that again. I said enter between 1-10"
+    puts "Enter Here:"
+    dogs(user_input)
+  end
 
+  def self.runner
+    welcome
+    get_user_answer
+    puts "Enter Here:"
+    dogs(user_input)
+  end
 end
