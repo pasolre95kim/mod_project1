@@ -10,6 +10,38 @@ class Service < ActiveRecord::Base
     end
   end
 
+  def self.a_lot_of_hearts
+    puts "
+
+    ***     ***                   ***     ***                   ***     ***
+   **   ** **   **               **   ** **   **               **   ** **   **
+  *       *       *             *       *       *             *       *       *
+  *               *             *               *             *               *
+   *     LOVE    *               *     DOG    *               *     LOVE    *
+    **         **   ***     ***   **         **   ***     ***   **         **
+      **     **   **   ** **   **   **     DOG **   ** **   **   **     **
+        ** **    *       *       *    ** **    *       *       *    ** **
+          *      *               *      *      *               *      *
+                  *     DOG    *               *     LOVE    *
+     ***     ***   **         **   ***     ***   **         **   ***     ***
+   **   ** **   **   **     **   **   ** **   **   **     **   **   ** **   **
+  *       *       *    ** **    *       *       *    ** **    *       *       *
+  *               *      *      *               *      *      *               *
+   *     DOG    *               *     LOVE    *               *     DOG    *
+    **         **   ***     ***   **         **   ***     ***   **         **
+      **     **   **   ** **   **   **     **   **   ** **   **   **     **
+        ** **    *       *       *    ** **    *       *       *    ** **
+          *      *               *      *      *               *      *
+                  *     LOVE    *               *     DOG    *
+                   **         **                 **         **
+                     **     **                     **     **
+                       ** **                         ** **
+                         *                             *
+    ".magenta.blink
+
+end
+
+
   def self.ask_service
     puts "Which service would you like?"
     all_services
@@ -25,7 +57,9 @@ class Service < ActiveRecord::Base
   end
 
     def self.run
+      a_lot_of_hearts
       ask_service
+      puts "Enter Here:"
       users_answer(user_input)
       Launchy.open(Dog.dog.picture)
       Dog.runner

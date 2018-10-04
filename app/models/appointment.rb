@@ -11,9 +11,13 @@ class Appointment < ActiveRecord::Base
 
   def self.pics
     puts "
-            >(.)__ <(.)__ =(.)__
-              (___/  (___/  (___/
-                                       "
+        >(.)__     quack quack
+          (___/
+                <(.)__    quack
+                  (___/
+                          =(.)__   
+                            (___/
+                            ".yellow
   end
 
   def self.get_appointments
@@ -33,7 +37,8 @@ class Appointment < ActiveRecord::Base
 
   def self.appointment_answer(arg)
     @@appointment = Appointment.find(arg)
-    puts "I'll make an appointment for #{appointment.day}"
+    puts " "
+    puts "Okay! I'll make an appointment for #{appointment.day}"
     Service.run
   end
 
@@ -52,5 +57,11 @@ class Appointment < ActiveRecord::Base
     service_answer(user_input)
   end
 
+  def self.runner_two
+    puts " "
+    puts "Let's try that again. Please enter between 1-6"
+    puts "Enter Here:"
+    appointment_answer(user_input)
+  end
 
 end
